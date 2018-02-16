@@ -1,8 +1,8 @@
 <?php
 $titleArray = array(__('Scripto'), __('Transcribe Page'));
-queue_css_file('transcribeStyle');
 queue_css_url('https://www.w3schools.com/w3css/4/w3.css');
-$head = array('title' => html_escape(implode(' | ', $titleArray)));
+queue_css_file('transcribeStyle');
+$head = array('title' => html_escape(implode(' | ', $titleArray)), 'bodyclass' => 'w3Page');
 echo head($head);
 ?>
 <?php echo js_tag('OpenLayers'); ?>
