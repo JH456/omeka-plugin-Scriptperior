@@ -12,7 +12,7 @@ jQuery(document).ready(function() {
     jQuery('#scripto-transcription-page-edit').click(function() {
         jQuery('#scripto-transcription-page-edit').
             prop('disabled', true).
-            text('<?php echo __('Saving transcription...'); ?>');
+            text('<?php echo __('Suggesting Changes...'); ?>');
         jQuery.post(
             <?php echo js_escape(url('scripto/index/page-action')); ?>, 
             {
@@ -25,7 +25,7 @@ jQuery(document).ready(function() {
             function(data) {
                 jQuery('#scripto-transcription-page-edit').
                     prop('disabled', false).
-                    text('<?php echo __('Save Changes'); ?>');
+                    text('<?php echo __('Suggest Changes'); ?>');
                 jQuery('#scripto-transcription-page-html').html(data);
             }
         ).fail(function(error) {
@@ -34,7 +34,7 @@ jQuery(document).ready(function() {
                 + '<?php echo __('Save your work elsewhere and try again. Contact the administrator if this error persists.'); ?>');
             jQuery('#scripto-transcription-page-edit').
                 prop('disabled', false).
-                text('<?php echo __('Save Changes'); ?>');
+                text('<?php echo __('Suggest Changes'); ?>');
         });
     });
     
@@ -290,7 +290,7 @@ jQuery(document).ready(function() {
     <?php if ($this->scripto->canExport()): ?>
     
     jQuery('#scripto-transcription-page-import').click(function() {
-        jQuery(this).prop('disabled', true).text('<?php echo __('Importing page...'); ?>');
+        jQuery(this).prop('disabled', true).text('<?php echo __('Approving page...'); ?>');
         jQuery.post(
             <?php echo js_escape(url('scripto/index/page-action')); ?>, 
             {
@@ -302,7 +302,7 @@ jQuery(document).ready(function() {
             function(data) {
                 jQuery('#scripto-transcription-page-import').
                     prop('disabled', false).
-                    text('<?php echo __('Import page'); ?>');
+                    text('<?php echo __('Approve page'); ?>');
             }
         );
     });
@@ -369,7 +369,7 @@ jQuery(document).ready(function() {
     <div id="scripto-transcription-edit" style="display: none;">
         <div><?php echo $this->formTextarea('scripto-transcription-page-wikitext', $this->doc->getTranscriptionPageWikitext(), array('cols' => '76', 'rows' => '16')); ?></div>
         <div>
-            <?php echo $this->formButton('scripto-transcription-page-edit', __('Save Changes'), array('style' => 'display:inline; float:none;color:black')); ?> 
+            <?php echo $this->formButton('scripto-transcription-page-edit', __('Suggest Changes'), array('style' => 'display:inline; float:none;')); ?> 
         </div>
         <p><a href="http://www.mediawiki.org/wiki/Help:Formatting" target="_blank"><?php echo __('wiki formatting help'); ?></a></p>
     </div><!-- #scripto-transcription-edit -->
@@ -383,7 +383,7 @@ jQuery(document).ready(function() {
     <div>
         <?php if ($this->scripto->isLoggedIn()): ?><?php echo $this->formButton('scripto-page-watch'); ?> <?php endif; ?>
         <?php if ($this->scripto->canProtect()): ?><?php echo $this->formButton('scripto-transcription-page-protect'); ?> <?php endif; ?>
-        <?php if ($this->scripto->canExport()): ?><?php echo $this->formButton('scripto-transcription-page-import', __('Import page'), array('style' => 'display:inline; float:none;')); ?><?php endif; ?>
+        <?php if ($this->scripto->canExport()): ?><?php echo $this->formButton('scripto-transcription-page-import', __('Approve page'), array('style' => 'display:inline; float:none;')); ?><?php endif; ?>
     </div>
     <div id="scripto-transcription-page-html"><?php echo $this->transcriptionPageHtml; ?></div>
     </div>

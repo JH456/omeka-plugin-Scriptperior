@@ -395,3 +395,10 @@ div.olControlSaveFeaturesItemInactive {
     top: 5px;
     right: 0px;
 }
+.left {
+    float: left;
+    width:50%;
+}
+.right {
+    margin-left: 50%;
+}
