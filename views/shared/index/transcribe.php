@@ -27,8 +27,11 @@ jQuery(document).ready(function() {
             function(data) {
                 jQuery('#scripto-transcription-page-edit').
                     prop('disabled', false).
-                    text('<?php echo __('Suggest Changes'); ?>');
+                    text('<?php echo __('Suggest Edit'); ?>');
                 jQuery('#scripto-transcription-page-html').html(data);
+                jQuery('#scripto-transcription-edit').hide();
+                jQuery('#scripto-transcription-page-html').show();
+                jQuery('#scripto-transcription-edit-show').text('<?php echo __('edit'); ?>');
             }
         ).fail(function(error) {
             alert('<?php echo __('There was an error:'); ?>' + "\n\n"
@@ -36,7 +39,7 @@ jQuery(document).ready(function() {
                 + '<?php echo __('Save your work elsewhere and try again. Contact the administrator if this error persists.'); ?>');
             jQuery('#scripto-transcription-page-edit').
                 prop('disabled', false).
-                text('<?php echo __('Suggest Changes'); ?>');
+                text('<?php echo __('Suggest Edit'); ?>');
         });
     });
     
@@ -59,6 +62,9 @@ jQuery(document).ready(function() {
                     prop('disabled', false).
                     text('<?php echo __('Edit discussion'); ?>');
                 jQuery('#scripto-talk-page-html').html(data);
+                jQuery('#scripto-talk-edit').hide();
+                jQuery('#scripto-talk-page-html').show();
+                jQuery('#scripto-talk-edit-show').text('<?php echo __('edit'); ?>');
             }
         ).fail(function(error) {
             alert('<?php echo __('There was an error:'); ?>' + "\n\n"
@@ -95,13 +101,13 @@ jQuery(document).ready(function() {
             jQuery('#scripto-page-show').text('<?php echo __('show discussion'); ?>');
         }
     });
-    
+
     // Toggle show transcription edit.
     jQuery('#scripto-transcription-edit-show').click(function(event) {
         event.preventDefault();
         var clicks = jQuery(this).data('clicks');
         if (!clicks) {
-            jQuery(this).text('<?php echo __('hide edit'); ?>');
+            jQuery(this).text('<?php echo __('cancel edit'); ?>');
             jQuery('#scripto-transcription-edit').show();
             jQuery('#scripto-transcription-page-html').hide();
         } else {
@@ -117,7 +123,7 @@ jQuery(document).ready(function() {
         event.preventDefault();
         var clicks = jQuery(this).data('clicks');
         if (!clicks) {
-            jQuery(this).text('<?php echo __('hide edit'); ?>');
+            jQuery(this).text('<?php echo __('cancel edit'); ?>');
             jQuery('#scripto-talk-edit').show();
             jQuery('#scripto-talk-page-html').hide();
         } else {
@@ -356,7 +362,6 @@ jQuery(document).ready(function() {
          | <a href="<?php echo html_escape(url(array('controller' => 'files', 'action' => 'show', 'id' => $this->doc->getPageId()), 'id')); ?>"><?php echo __('View file'); ?></a>
         </p> 
         <h2><?php if ($this->doc->getTitle()): ?><?php echo $this->doc->getTitle(); ?><?php else: ?><?php echo __('Untitled Document'); ?><?php endif; ?></h2>
-        <p><?php echo $this->doc->getPageName(); ?></p>
 
         <!-- document viewer -->
         <?php echo file_markup($this->file, array('imageSize' => 'fullsize')); ?>
@@ -387,14 +392,14 @@ jQuery(document).ready(function() {
         <div id="scripto-transcription-edit" style="display: none;">
             <div><?php echo $this->formTextarea('scripto-transcription-page-wikitext', $this->doc->getTranscriptionPageWikitext(), array('cols' => '76', 'rows' => '16')); ?></div>
             <div>
-                <?php echo $this->formButton('scripto-transcription-page-edit', __('Suggest Changes'), array('style' => 'display:inline; float:none;')); ?> 
+                <?php echo $this->formButton('scripto-transcription-page-edit', __('Suggest Edit'), array('style' => 'display:inline; float:none;')); ?> 
             </div>
             <p><a href="http://www.mediawiki.org/wiki/Help:Formatting" target="_blank"><?php echo __('wiki formatting help'); ?></a></p>
         </div><!-- #scripto-transcription-edit -->
         <?php else: ?>
         <p><?php echo __('You don\'t have permission to transcribe this page.'); ?></p>
         <?php endif; ?>
-        <div id="scripto-transcription-page-html"><?php echo $this->transcriptionPageHtml; ?></div>
+        <div id="scripto-transcription-page-html" class='pageHTML' ><?php echo $this->transcriptionPageHtml; ?></div>
         </div>
     </div><!-- #scripto-transcription -->
 
@@ -418,7 +423,7 @@ jQuery(document).ready(function() {
         <?php else: ?>
         <p><?php echo __('You don\'t have permission to discuss this page.'); ?></p>
         <?php endif; ?>
-        <div id="scripto-talk-page-html"><?php echo $this->talkPageHtml; ?></div>
+        <div id="scripto-talk-page-html" class='pageHTML'><?php echo $this->talkPageHtml; ?></div>
     </div><!-- #scripto-talk -->
 </div>
 

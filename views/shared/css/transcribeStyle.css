@@ -9,3 +9,8 @@ textarea {
   box-sizing: initial;
   font-size: .95em;
 }
+
+.pageHTML {
+  height: 600px;
+  overflow-y: scroll;
+}
