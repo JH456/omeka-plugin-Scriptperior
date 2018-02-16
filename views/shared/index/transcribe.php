@@ -12,7 +12,7 @@ jQuery(document).ready(function() {
     jQuery('#scripto-transcription-page-edit').click(function() {
         jQuery('#scripto-transcription-page-edit').
             prop('disabled', true).
-            text('<?php echo __('Editing transcription...'); ?>');
+            text('<?php echo __('Saving transcription...'); ?>');
         jQuery.post(
             <?php echo js_escape(url('scripto/index/page-action')); ?>, 
             {
@@ -25,7 +25,7 @@ jQuery(document).ready(function() {
             function(data) {
                 jQuery('#scripto-transcription-page-edit').
                     prop('disabled', false).
-                    text('<?php echo __('Edit transcription'); ?>');
+                    text('<?php echo __('Save Changes'); ?>');
                 jQuery('#scripto-transcription-page-html').html(data);
             }
         ).fail(function(error) {
@@ -34,7 +34,7 @@ jQuery(document).ready(function() {
                 + '<?php echo __('Save your work elsewhere and try again. Contact the administrator if this error persists.'); ?>');
             jQuery('#scripto-transcription-page-edit').
                 prop('disabled', false).
-                text('<?php echo __('Edit transcription'); ?>');
+                text('<?php echo __('Save Changes'); ?>');
         });
     });
     
@@ -348,9 +348,9 @@ jQuery(document).ready(function() {
  | <a href="<?php echo html_escape(url(array('controller' => 'items', 'action' => 'show', 'id' => $this->doc->getId()), 'id')); ?>"><?php echo __('View item'); ?></a>
  | <a href="<?php echo html_escape(url(array('controller' => 'files', 'action' => 'show', 'id' => $this->doc->getPageId()), 'id')); ?>"><?php echo __('View file'); ?></a>
 </p> 
-
+<div id="left" style="float: left;width:50%">
 <h2><?php if ($this->doc->getTitle()): ?><?php echo $this->doc->getTitle(); ?><?php else: ?><?php echo __('Untitled Document'); ?><?php endif; ?></h2>
-<h3><?php echo $this->doc->getPageName(); ?></h3>
+<p><?php echo $this->doc->getPageName(); ?></p>
 
 <!-- document viewer -->
 <?php echo file_markup($this->file, array('imageSize' => 'fullsize')); ?>
@@ -361,14 +361,15 @@ jQuery(document).ready(function() {
  | <?php if (isset($this->paginationUrls['next'])): ?><a href="<?php echo html_escape($this->paginationUrls['next']); ?>"><?php echo __('next page'); ?> &#187;</a><?php else: ?><?php echo __('next page'); ?> &#187;<?php endif; ?>
  | <a href="#" id="scripto-page-show"></a>
 </p>
-
+</div>	
 <!-- transcription -->
 <div id="scripto-transcription">
+    <div class="right" style="margin-left:50%">
     <?php if ($this->doc->canEditTranscriptionPage()): ?>
     <div id="scripto-transcription-edit" style="display: none;">
         <div><?php echo $this->formTextarea('scripto-transcription-page-wikitext', $this->doc->getTranscriptionPageWikitext(), array('cols' => '76', 'rows' => '16')); ?></div>
         <div>
-            <?php echo $this->formButton('scripto-transcription-page-edit', __('Edit transcription'), array('style' => 'display:inline; float:none;')); ?> 
+            <?php echo $this->formButton('scripto-transcription-page-edit', __('Save Changes'), array('style' => 'display:inline; float:none;color:black')); ?> 
         </div>
         <p><a href="http://www.mediawiki.org/wiki/Help:Formatting" target="_blank"><?php echo __('wiki formatting help'); ?></a></p>
     </div><!-- #scripto-transcription-edit -->
@@ -385,6 +386,7 @@ jQuery(document).ready(function() {
         <?php if ($this->scripto->canExport()): ?><?php echo $this->formButton('scripto-transcription-page-import', __('Import page'), array('style' => 'display:inline; float:none;')); ?><?php endif; ?>
     </div>
     <div id="scripto-transcription-page-html"><?php echo $this->transcriptionPageHtml; ?></div>
+    </div>
 </div><!-- #scripto-transcription -->
 
 <!-- discussion -->
