@@ -365,8 +365,8 @@ jQuery(document).ready(function() {
 
         <!-- document viewer -->
         <?php echo file_markup($this->file, array('imageSize' => 'fullsize')); ?>
-
-        <!-- pagination -->
+       
+         <!-- pagination -->
     <p>
     <?php if (isset($this->paginationUrls['previous'])): ?><a href="<?php echo html_escape($this->paginationUrls['previous']); ?>">&#171; <?php echo __('previous page'); ?></a><?php else: ?>&#171; <?php echo __('previous page'); ?><?php endif; ?>
      | <?php if (isset($this->paginationUrls['next'])): ?><a href="<?php echo html_escape($this->paginationUrls['next']); ?>"><?php echo __('next page'); ?> &#187;</a><?php else: ?><?php echo __('next page'); ?> &#187;<?php endif; ?>
