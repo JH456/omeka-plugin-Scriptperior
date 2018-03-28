@@ -399,7 +399,7 @@ jQuery(document).ready(function() {
         <?php else: ?>
         <p><?php echo __('You don\'t have permission to transcribe this page.'); ?></p>
         <?php endif; ?>
-        <div id="scripto-transcription-page-html" class='pageHTML' ><?php echo $this->transcriptionPageHtml; ?></div>
+        <div id="scripto-transcription-page-html" class='pageHTML' ><?php echo nl2br($this->transcriptionPageHtml); ?></div>
         </div>
     </div><!-- #scripto-transcription -->
 
